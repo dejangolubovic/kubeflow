@@ -75,7 +75,7 @@ func filterPodDefaults(list []settingsapi.PodDefault, pod *corev1.Pod) ([]*setti
 	for _, pd := range list {
 		klog.Infof(pd.GetName())
 		selector, err := metav1.LabelSelectorAsSelector(&pd.Spec.Selector)
-		klog.Infof(selector)
+		
 		if err != nil {
 			klog.Infof("label selector conversion failed: %v for selector: ", pd.Spec.Selector)
 			return nil, fmt.Errorf("label selector conversion failed: %v for selector: %v", pd.Spec.Selector, err)
