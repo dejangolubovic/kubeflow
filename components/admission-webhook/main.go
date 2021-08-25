@@ -73,14 +73,17 @@ func filterPodDefaults(list []settingsapi.PodDefault, pod *corev1.Pod) ([]*setti
 	klog.Infof(pod.GetName())
 
 	for _, pd := range list {
+		klog.Infof(pd.GetName())
 		selector, err := metav1.LabelSelectorAsSelector(&pd.Spec.Selector)
+		klog.Infof(selector)
 		if err != nil {
+			klog.Infof("label selector conversion failed: %v for selector: ", pd.Spec.Selector)
 			return nil, fmt.Errorf("label selector conversion failed: %v for selector: %v", pd.Spec.Selector, err)
 		}
 
 		// check if the pod labels match the selector
 		if !selector.Matches(labels.Set(pod.Labels)) {
-			klog.V(6).Infof("PodDefault '%s' does NOT match pod '%s' labels", pd.GetName(), pod.GetName())
+			klog.Infof("PodDefault '%s' does NOT match pod '%s' labels", pd.GetName(), pod.GetName())
 			continue
 		}
 		klog.Infof(pd.GetName())
@@ -89,7 +92,7 @@ func filterPodDefaults(list []settingsapi.PodDefault, pod *corev1.Pod) ([]*setti
 			klog.Infof("PodDefault '%s' is not in the namespcae of pod '%s' ", pd.GetName(), pod.GetName())
 			continue
 		}
-		klog.V(4).Infof("PodDefault '%s' matches pod '%s' labels", pd.GetName(), pod.GetName())
+		klog.Infof("PodDefault '%s' matches pod '%s' labels", pd.GetName(), pod.GetName())
 		// create pointer to a non-loop variable
 		newPD := pd
 		matchingPDs = append(matchingPDs, &newPD)
