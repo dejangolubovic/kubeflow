@@ -19,5 +19,5 @@ RUN if [ "$(uname -m)" = "aarch64" ]; then \
 # Copy the controller-manager into a distroless image
 FROM gcr.io/distroless/static-debian10:fd0d99e8c54d7d7b2f3dd29f5093d030d192cbbc
 WORKDIR /
-COPY --from=builder /go/src/github.com/kubeflow/kubeflow/components/admission-webhook/webhook .
+COPY --from=builder /go/src/github.com/dejangolubovic/kubeflow/components/admission-webhook/webhook .
 ENTRYPOINT ["/webhook"]
