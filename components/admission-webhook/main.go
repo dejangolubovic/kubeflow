@@ -463,8 +463,11 @@ func mutatePods(ar v1beta1.AdmissionReview) *v1beta1.AdmissionResponse {
 
 	raw := ar.Request.Object.Raw
 	pod := corev1.Pod{}
+	job := corev1.Job{}
 	klog.Infof(pod.GetName())
 	klog.Infof(pod.GetNamespace())
+	klog.Infof(job.GetName())
+	klog.Infof(job.GetNamespace())
 	deserializer := codecs.UniversalDeserializer()
 	if _, _, err := deserializer.Decode(raw, nil, &pod); err != nil {
 		klog.Error(err)
