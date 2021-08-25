@@ -69,8 +69,8 @@ func toAdmissionResponse(err error) *v1beta1.AdmissionResponse {
 func filterPodDefaults(list []settingsapi.PodDefault, pod *corev1.Pod) ([]*settingsapi.PodDefault, error) {
 	var matchingPDs []*settingsapi.PodDefault
 	
-	klog.V(4).Infof("Filtering pods")
-	klog.V(4).Infof(pod.GetName())
+	klog.Infof("Filtering pods")
+	klog.Infof(pod.GetName())
 
 	for _, pd := range list {
 		selector, err := metav1.LabelSelectorAsSelector(&pd.Spec.Selector)
@@ -83,7 +83,7 @@ func filterPodDefaults(list []settingsapi.PodDefault, pod *corev1.Pod) ([]*setti
 			klog.V(6).Infof("PodDefault '%s' does NOT match pod '%s' labels", pd.GetName(), pod.GetName())
 			continue
 		}
-		klog.V(4).Infof(pd.GetName())
+		klog.Infof(pd.GetName())
 		// check if the pod namespace match the poddefault's namespace
 		if pd.GetNamespace() != pod.GetNamespace() {
 			klog.Infof("PodDefault '%s' is not in the namespcae of pod '%s' ", pd.GetName(), pod.GetName())
