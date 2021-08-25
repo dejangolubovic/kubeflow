@@ -3,7 +3,7 @@ ARG GOLANG_VERSION=1.12
 FROM golang:${GOLANG_VERSION} as builder
 
 # Copy in the go src
-WORKDIR /go/src/github.com/kubeflow/kubeflow/components/admission-webhook
+WORKDIR /go/src/github.com/dejangolubovic/kubeflow/components/admission-webhook
 COPY pkg/  pkg/
 COPY . .
 
